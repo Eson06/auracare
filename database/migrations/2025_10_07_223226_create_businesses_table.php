@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('businesses', function (Blueprint $table) {
             $table->id();
             $table->string('user_id');
+            $table->string('business_type');
             $table->string('business_name');
             $table->string('business_address');
             $table->string('business_permit');
@@ -21,11 +22,9 @@ return new class extends Migration
             $table->string('email');
             $table->string('contact_number');
             $table->string('address');
-            $table->string('picture')->nullable();
-            $table->string('qr')->nullable();
-            $table->string('gcash_number')->nullable();
-            $table->string('gcash_name')->nullable();
-            $table->string('status')->nullable();
+            $table->string('status');
+            $table->string('opening_time');
+            $table->string('closing_time');
             $table->timestamps();
         });
     }

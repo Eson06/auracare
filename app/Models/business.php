@@ -18,6 +18,8 @@ class business extends Model
     'business_address',
     'business_permit',
     'expiration_date',
+    'closing_time',
+    'opening time_time',
 ];
 
 }

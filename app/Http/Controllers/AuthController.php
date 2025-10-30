@@ -133,10 +133,14 @@ public function storebusiness(Request $request)
         'email'              => 'required|email|unique:businesses,email',
         'contact_number'     => 'required|string|max:20',
         'address'            => 'required|string|max:255',
+        'business_type'    => 'required|string|max:50',
         'business_name'      => 'required|string|max:100',
         'business_address'   => 'required|string|max:255',
         'business_permit'    => 'required|string|max:50',
-        'expiration_date'    => 'required|date|after:today',
+        'business_address'   => 'required|string|max:255',
+        'expiration_date'    => 'required|date',  
+        'opening_time'    => 'required|string|max:50',
+        'closing_time'    => 'required|string|max:50',
     ]);
 
     // Save to users table
@@ -163,6 +167,10 @@ public function storebusiness(Request $request)
     $businessSaved->business_address = $validated['business_address'];
     $businessSaved->business_permit  = $validated['business_permit'];
     $businessSaved->expiration_date  = $validated['expiration_date'];
+    $businessSaved->business_type  = $validated['business_type'];
+    $businessSaved->opening_time  = $validated['opening_time'];
+    $businessSaved->closing_time  = $validated['closing_time'];
+    $businessSaved->status  = "Waiting for Approval";
     $businessSaved->save();
 
     return redirect()->route('login')->with('success', 'Business registration successful!');

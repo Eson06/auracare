@@ -96,6 +96,18 @@
 
       {{-- Business Information --}}
       <h5 class="section-title mb-3">Business Information</h5>
+
+      <div class="mb-3">
+        <label for="business_type" class="form-label">Business Type</label>
+        <select class="form-select" id="business_type" name="business_type" required>
+          <option value="">-- Select Business Type --</option>
+          <option value="spa">Spa</option>
+          <option value="salon">Salon</option>
+          <option value="spa and salon">Spa and Salon</option>
+        </select>
+      </div>
+      
+
       <div class="mb-3">
         <label for="business_name" class="form-label">Business Name</label>
         <input type="text" class="form-control" id="business_name" name="business_name" required>
@@ -115,6 +127,37 @@
         <label for="expiration_date" class="form-label">Permit Expiration Date</label>
         <input type="date" class="form-control" id="expiration_date" name="expiration_date" required>
       </div>
+
+      <div class="mb-3">
+        <label for="opening_time" class="form-label">Opening Time</label>
+        <select class="form-select" id="opening_time" name="opening_time" required>
+            <option value="">-- Select Opening Time --</option>
+            @foreach ([
+                '01:00 AM','02:00 AM','03:00 AM','04:00 AM','05:00 AM','06:00 AM',
+                '07:00 AM','08:00 AM','09:00 AM','10:00 AM','11:00 AM','12:00 PM',
+                '01:00 PM','02:00 PM','03:00 PM','04:00 PM','05:00 PM','06:00 PM',
+                '07:00 PM','08:00 PM','09:00 PM','10:00 PM','11:00 PM','12:00 AM'
+            ] as $time)
+                <option value="{{ $time }}">{{ $time }}</option>
+            @endforeach
+        </select>
+    </div>
+    
+    <div class="mb-3">
+        <label for="closing_time" class="form-label">Closing Time</label>
+        <select class="form-select" id="closing_time" name="closing_time" required>
+            <option value="">-- Select Closing Time --</option>
+            @foreach ([
+                '01:00 AM','02:00 AM','03:00 AM','04:00 AM','05:00 AM','06:00 AM',
+                '07:00 AM','08:00 AM','09:00 AM','10:00 AM','11:00 AM','12:00 PM',
+                '01:00 PM','02:00 PM','03:00 PM','04:00 PM','05:00 PM','06:00 PM',
+                '07:00 PM','08:00 PM','09:00 PM','10:00 PM','11:00 PM','12:00 AM'
+            ] as $time)
+                <option value="{{ $time }}">{{ $time }}</option>
+            @endforeach
+        </select>
+    </div>
+    
 
 
       <hr class="my-4">

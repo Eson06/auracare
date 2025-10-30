@@ -31,20 +31,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('Admin123'),
         ]);
 
-            User::create([
-            'user_name' => 'business',
-            'first_name' => 'Pedro',
-            'last_name' => 'Gomez',
-            'password' => bcrypt('Business123'),
-        ]);
-
-            User::create([
-            'user_name' => 'Customer',
-            'first_name' => 'Maria',
-            'last_name' => 'DelMundo',
-            'password' => bcrypt('Customer123'),
-        ]);
-
            user_role::create([
             'user_id' => 1,
             'role_id' => '1',

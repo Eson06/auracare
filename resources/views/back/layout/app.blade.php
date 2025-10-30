@@ -5,8 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" /> 
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title> @yield('pageTitle') | Aura Care</title>
-    <link rel="icon" href="{{asset('images/AuraCare_Logo.png')}}" />
+    <title> @yield('pageTitle') | CNHS PORTAL</title>
+    <link rel="icon" href="{{asset('images/cnhs_logo.png')}}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <link href="{{ asset('dist/css/tabler.min.css') }}" rel="stylesheet" />
@@ -16,12 +16,8 @@
     <script src="{{ asset('/sw.js') }}"></script>
 
     <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.css') }}">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
 
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#000000">
 

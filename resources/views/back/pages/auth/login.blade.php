@@ -91,14 +91,13 @@
     object-fit: contain;
   }
 
-  /* Reduced space below the login form */
   .register-buttons {
-    margin-top: 0.5rem; /* reduced from 1.5rem */
+    margin-top: 0.5rem;
     text-align: center;
   }
 
   .register-buttons .btn {
-    margin-top: 0.25rem; /* tighter spacing between the two buttons */
+    margin-top: 0.25rem;
   }
 </style>
 
@@ -112,21 +111,21 @@
     </div>
 
     <div class="text-center login-title">Login to Your Account</div>
-@if (session('success'))
-  <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <i class="bi bi-check-circle-fill me-1"></i> 
-    {{ session('success') }}
-  </div>
-@endif
 
-@if (session('error'))
-  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <i class="bi bi-exclamation-circle-fill me-1"></i>
-    {{ session('error') }}
-  </div>
-@endif
+    @if (session('success'))
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-1"></i> 
+        {{ session('success') }}
+      </div>
+    @endif
 
-    {{-- Alert Messages --}}
+    @if (session('error'))
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-circle-fill me-1"></i>
+        {{ session('error') }}
+      </div>
+    @endif
+
     @if(Session::get('fail'))
       <div class="alert alert-warning d-flex align-items-center">
         <i class="bi bi-exclamation-triangle-fill me-2"></i>
@@ -155,12 +154,19 @@
         @enderror
       </div>
 
+      <!-- ✅ Updated Password Field with Show/Hide -->
       <div class="mb-4">
         <label class="form-label">Password</label>
-        <input type="password" 
-               class="form-control @error('password') is-invalid @enderror" 
-               name="password" 
-               placeholder="Enter your password">
+        <div class="input-group">
+          <input type="password" 
+                 class="form-control @error('password') is-invalid @enderror" 
+                 name="password" 
+                 id="password"
+                 placeholder="Enter your password">
+          <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+            <i class="bi bi-eye"></i>
+          </button>
+        </div>
         @error('password')
           <span class="text-danger small">{{ $message }}</span>
         @enderror
@@ -180,12 +186,30 @@
         <a href="{{ route('customer') }}" class="btn btn-modern py-2">
           👤 Register as Customer
         </a>
-
       </div>
     </div>
 
   </div>
 </div>
+
+<!-- ✅ Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- ✅ Show/Hide Password Script -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const togglePassword = document.getElementById("togglePassword");
+    const passwordInput = document.getElementById("password");
+
+    togglePassword.addEventListener("click", function () {
+      const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+      passwordInput.setAttribute("type", type);
+      this.innerHTML = type === "password"
+        ? '<i class="bi bi-eye"></i>'
+        : '<i class="bi bi-eye-slash"></i>';
+    });
+  });
+</script>
 
 <script>
 if ("serviceWorker" in navigator) {

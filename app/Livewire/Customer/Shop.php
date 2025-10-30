@@ -15,6 +15,7 @@ class Shop extends Component
     use WithFileUploads;
     // Business info
     public $class_id, $user_id, $business_name, $business_address, $business_permit, $expiration_date, $email, $contact_number, $address, $picture;
+    public $opening_time, $closing_time;
 
     // Service selection and booking
     public $selectedid, $name_service, $type_service, $price;
@@ -22,6 +23,7 @@ class Shop extends Component
     public $selectedStaff = null;
     public $selectedDateTime = null;
     public $date_schdedule, $selected_time, $amount_paid;
+    public $payment_option;
 
     public function mount($id)
     {
@@ -30,7 +32,6 @@ class Shop extends Component
         $this->class_id = $mybusiness->id;
         $this->user_id = $mybusiness->user_id;
         $this->business_name = $mybusiness->business_name;
-        // FIX: assign business_address from the correct field
         $this->business_address = $mybusiness->business_address;
         $this->business_permit = $mybusiness->business_permit;
         $this->expiration_date = $mybusiness->expiration_date;
@@ -38,13 +39,43 @@ class Shop extends Component
         $this->contact_number = $mybusiness->contact_number;
         $this->address = $mybusiness->address;
         $this->picture = $mybusiness->picture;
+        $this->opening_time = $mybusiness->opening_time;
+        $this->closing_time = $mybusiness->closing_time;
 
-        $this->servicestaff = collect(); // initialize as empty collection
+        $this->servicestaff = collect(); 
     }
 
-    /**
-     * Open reservation modal and populate selected service + staff list
-     */
+public function getAvailableTimesProperty()
+{
+    $times = [
+        '01:00 AM','02:00 AM','03:00 AM','04:00 AM','05:00 AM','06:00 AM',
+        '07:00 AM','08:00 AM','09:00 AM','10:00 AM','11:00 AM','12:00 PM',
+        '01:00 PM','02:00 PM','03:00 PM','04:00 PM','05:00 PM','06:00 PM',
+        '07:00 PM','08:00 PM','09:00 PM','10:00 PM','11:00 PM','12:00 AM'
+    ];
+
+    $open = strtotime($this->opening_time);
+    $close = strtotime($this->closing_time);
+
+    if ($close < $open) {
+        $close += 24 * 60 * 60;
+    }
+
+    $filtered = [];
+    foreach ($times as $time) {
+        $t = strtotime($time);
+        if ($t < $open) $t += 24 * 60 * 60;
+
+        if ($t >= $open && $t <= $close) {
+            $filtered[] = $time;
+        }
+    }
+
+    return $filtered;
+}
+
+
+
     public function openReservationModal($id)
     {
         $selectedService = service::findOrFail($id);
@@ -54,30 +85,33 @@ class Shop extends Component
         $this->type_service = $selectedService->type_service;
         $this->price        = $selectedService->price;
         $this->servicestaff = $selectedService->servicestaff()->get();
-
-        // reset selection
         $this->selectedStaff = null;
         $this->selectedDateTime = null;
 
-     
+        $this->opening_time   = $selectedService->business->opening_time;
+        $this->closing_time   = $selectedService->business->closing_time;
     }
 
-    /**
-     * Example AddServices stub — implement your actual saving logic here
-     */
+
+public function updatedPaymentOption($value)
+{
+    if ($value === 'full') {
+        $this->amount_paid = $this->price;
+    } elseif ($value === 'half') {
+        $this->amount_paid = $this->price / 2;
+    } else {
+        $this->amount_paid = null;
+    }
+}
+
+
     public function AddServices()
     {
         $this->validate([
             'selectedStaff' => 'required',
             'selectedDateTime' => 'required|date',
         ]);
-
-        // TODO: save reservation logic here...
-        // e.g. Reservation::create([...]);
-
         $this->dispatchBrowserEvent('showToastr', ['Service saved successfully.', 'success']);
-
-        // reset after saving
         $this->selectedid = null;
         $this->name_service = null;
         $this->type_service = null;

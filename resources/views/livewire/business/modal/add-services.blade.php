@@ -97,7 +97,7 @@
                     <!-- Price -->
                     <div class="form-group mb-3">
                         <label for="price">Price</label>
-                        <input type="text" wire:model="price" id="price" class="form-control" placeholder="Enter price">
+                        <input type="number" wire:model="price" id="price" class="form-control" placeholder="Enter price">
                         @error('price') <span class="text-danger small">{{ $message }}</span> @enderror
                     </div>
 

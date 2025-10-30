@@ -10,7 +10,7 @@ class Home extends Component
 
      public function render()
     {
-         $businesses = business::all();
+        $businesses = Business::where('status', 'approved')->get();
     return view('livewire.customer.home', [
         'businesses' => $businesses
     ]);

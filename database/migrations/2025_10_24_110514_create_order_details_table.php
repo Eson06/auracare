@@ -21,6 +21,10 @@ return new class extends Migration
             $table->string('picture')->nullable();
             $table->decimal('amount_paid', 10, 2);
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('status')->default('pending');
+            $table->string('balance');
+            $table->string('ratings')->nullable();
+            $table->string('comment')->nullable();
             $table->timestamps();
         });
     }

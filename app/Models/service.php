@@ -18,6 +18,10 @@ class service extends Model
         'picture',
     ];
 
+    public function business()
+    {
+        return $this->belongsTo(business::class,'business_id','user_id');
+    }
 
     public function staff()
 {
