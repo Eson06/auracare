@@ -1,0 +1,20 @@
+{
+  "name": "CNHS PORTAL",
+  "short_name": "CNHS",
+  "start_url": "https://cnhs.onlineapp.io/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/images/cnhs_logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/cnhs_logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
