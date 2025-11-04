@@ -11,6 +11,7 @@ use App\Livewire\Business\Booking;
 use App\Livewire\Business\Review;
 use App\Livewire\Business\Services;
 use App\Livewire\Customer\Home;
+use App\Livewire\Customer\Reservation;
 use App\Livewire\Customer\Shop;
 use App\Livewire\Register\Customer;
 
@@ -73,6 +74,7 @@ Route::middleware(['auth:web'],['revalidate'])->group(function() {
     Route::prefix('customer-panel')->name('customer.')->group(function(){
         Route::get('/home', Home::class)->name('home');
         Route::get('/shop/{id}', Shop::class)->name('shop');
+        Route::get('/reservation', Reservation::class)->name('reservation');
 
      });
 

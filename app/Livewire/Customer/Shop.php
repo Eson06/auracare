@@ -14,7 +14,7 @@ class Shop extends Component
 {
     use WithFileUploads;
     // Business info
-    public $class_id, $user_id, $business_name, $business_address, $business_permit, $expiration_date, $email, $contact_number, $address, $picture;
+    public $class_id, $user_id, $business_name, $business_address, $business_permit, $expiration_date, $email, $contact_number, $address, $picture, $business_id;
     public $opening_time, $closing_time;
 
     // Service selection and booking
@@ -81,6 +81,7 @@ public function getAvailableTimesProperty()
         $selectedService = service::findOrFail($id);
 
         $this->selectedid   = $selectedService->id;
+        $this->business_id   = $selectedService->business_id;
         $this->name_service = $selectedService->name_service;
         $this->type_service = $selectedService->type_service;
         $this->price        = $selectedService->price;
@@ -148,6 +149,7 @@ public function updatedPaymentOption($value)
 
     try {
         $neworder = new order_details();
+        $neworder->business_id = $this->business_id;
         $neworder->name_service = $this->name_service;
         $neworder->type_service = $this->type_service;
         $neworder->price = $this->price;

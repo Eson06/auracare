@@ -24,7 +24,9 @@
                             <th>Time</th>
                             <th>Picture</th>
                             <th>Amount Paid</th>
+                            <th>Balance</th>
                             <th>Customer Name</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,16 +46,29 @@
                                     @endif
                                 </td>
                                 <td>₱{{ number_format($order->amount_paid, 2) }}</td>
-                                <td>{{ $order->customer->first_name  }}  {{ $order->customer->last_name  }}</td>
+                                <td>
+                                    ₱{{ number_format($order->price - $order->amount_paid, 2) }}
+                                </td>
+                                <td>{{ $order->customer->first_name }} {{ $order->customer->last_name }}</td>
+                                <td>
+                                    @if ($order->status === 'completed')
+                                        <span class="badge bg-success">Completed</span>
+                                    @else
+                                        <button wire:click="markAsCompleted({{ $order->id }})" class="btn btn-sm btn-success">
+                                            Mark as Completed
+                                        </button>
+                                    @endif
+                                </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="9" class="text-center text-muted py-3">
+                                <td colspan="10" class="text-center text-muted py-3">
                                     No order details found.
                                 </td>
                             </tr>
                         @endforelse
                     </tbody>
+                    
                 </table>
             </div>
         </div>

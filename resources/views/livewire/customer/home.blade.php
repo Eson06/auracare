@@ -36,24 +36,40 @@
             </span>
           </p>
 
-          {{-- ⭐ Star Ratings --}}
           @php
-              $rating = $business->rating ?? 4.3; // Example rating, replace with your DB field
-              $stars = floor($rating);
-              $half = ($rating - $stars) >= 0.5;
-          @endphp
-          <div class="mb-2">
-            @for ($i = 0; $i < $stars; $i++)
-              <i class="bi bi-star-fill text-warning small"></i>
-            @endfor
-            @if ($half)
-              <i class="bi bi-star-half text-warning small"></i>
-            @endif
-            @for ($i = $stars + ($half ? 1 : 0); $i < 5; $i++)
-              <i class="bi bi-star text-warning small"></i>
-            @endfor
-            <span class="text-muted small ms-1">({{ number_format($rating, 1) }})</span>
-          </div>
+          $averageRating = round($business->ratings->avg('rating') ?? 0, 1);
+          $ratingCount = $business->ratings->whereNotNull('rating')->count();
+      
+          $fullStars = floor($averageRating);
+          $halfStar = ($averageRating - $fullStars) >= 0.5;
+      @endphp
+      
+      <p class="mb-0">
+          {{-- Full stars --}}
+          @for ($i = 0; $i < $fullStars; $i++)
+              <i class="bi bi-star-fill text-warning"></i>
+          @endfor
+      
+          {{-- Half star --}}
+          @if ($halfStar)
+              <i class="bi bi-star-half text-warning"></i>
+          @endif
+      
+          {{-- Empty stars --}}
+          @for ($i = $fullStars + (int)$halfStar; $i < 5; $i++)
+              <i class="bi bi-star text-warning"></i>
+          @endfor
+      
+          {{-- Display average and count --}}
+          @if ($ratingCount > 0)
+              <span class="text-dark">({{ number_format($averageRating, 1) }} from {{ $ratingCount }} ratings)</span>
+          @else
+              <span class="text-muted">No ratings yet</span>
+          @endif
+      </p>
+      
+      
+
 
           {{-- View Services Button --}}
           <a href="{{ route('customer.shop', $business->id) }}" 

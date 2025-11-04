@@ -8,11 +8,16 @@ use Livewire\Component;
 class Home extends Component
 {
 
-     public function render()
+    public function render()
     {
-        $businesses = Business::where('status', 'approved')->get();
-    return view('livewire.customer.home', [
-        'businesses' => $businesses
-    ]);
+        $businesses = Business::where('status', 'approved')
+            ->with('ratings') 
+            ->get();
+    
+        return view('livewire.customer.home', [
+            'businesses' => $businesses
+        ]);
     }
+    
+    
 }

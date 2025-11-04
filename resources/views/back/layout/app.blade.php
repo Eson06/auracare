@@ -21,6 +21,9 @@
     <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#000000">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
 <!-- For iOS support -->
 <link rel="apple-touch-icon" href="/images/cnhs_logo.png">
 <meta name="apple-mobile-web-app-capable" content="yes">

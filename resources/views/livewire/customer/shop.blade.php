@@ -109,6 +109,7 @@
                                     <i class="bi bi-calendar-check me-1"></i> Reserve
                                 </button>
                             </div>
+
                         </div>
                     </div>
                 @empty

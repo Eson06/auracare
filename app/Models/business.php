@@ -22,4 +22,11 @@ class business extends Model
     'opening time_time',
 ];
 
+public function ratings()
+{
+    return $this->hasMany(order_details::class, 'business_id', 'user_id');
+}
+
+
+
 }

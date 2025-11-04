@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
+            $table->string('business_id');
             $table->string('name_service');
             $table->string('type_service');
             $table->decimal('price', 10, 2);
@@ -22,7 +23,6 @@ return new class extends Migration
             $table->decimal('amount_paid', 10, 2);
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('status')->default('pending');
-            $table->string('balance');
             $table->string('ratings')->nullable();
             $table->string('comment')->nullable();
             $table->timestamps();
